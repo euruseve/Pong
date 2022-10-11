@@ -66,6 +66,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 {
 	static LPCTSTR szAppName{ (L"Game Window") };
 
+	ShowCursor(FALSE);
+
 	// Create Window Class
 	WNDCLASS window_class = {};
 	window_class.style = CS_HREDRAW | CS_VREDRAW;
@@ -77,6 +79,15 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	// Create Window
 	HWND window = CreateWindow(szAppName, L"Pong", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 1280, 720, 0, 0, hInstance, 0);
+	
+	// Fullscreen
+	//{
+	//	SetWindowLong(window, GWL_STYLE, GetWindowLong(window, GWL_STYLE) & ~WS_OVERLAPPEDWINDOW);
+	//	MONITORINFO mi = { sizeof(mi) };
+	//	GetMonitorInfo(MonitorFromWindow(window, MONITOR_DEFAULTTOPRIMARY), &mi);
+	//	SetWindowPos(window, HWND_TOP, mi.rcMonitor.left, mi.rcMonitor.top, mi.rcMonitor.right - mi.rcMonitor.left, mi.rcMonitor.bottom - mi.rcMonitor.top, SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+	//}
+	
 	HDC hdc = GetDC(window);
 
 	Input input{};
@@ -127,6 +138,9 @@ input.buttons[b].is_down = is_down;\
 						process_button(BUTTON_DOWN, VK_DOWN)
 						process_button(BUTTON_W, 'W')
 						process_button(BUTTON_S, 'S')
+						process_button(BUTTON_LEFT, VK_LEFT)
+						process_button(BUTTON_RIGHT, VK_RIGHT)
+						process_button(BUTTON_ENTER, VK_RETURN)
 					}
 
 				} break;
